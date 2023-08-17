@@ -1,9 +1,18 @@
 package cl.fabian.examen.actividad2.modelos;
 
 import cl.fabian.examen.actividad2.ICalculoDescuento;
-
+/**
+ * Implementación de la interfaz ICalculoDescuento que calcula el descuento
+ * basado en la especialidad y experiencia del doctor.
+ */
 public class CalculoEspecialidadExperiencia implements ICalculoDescuento {
-    @Override
+
+    /**
+     * Calcula el descuento basado en la especialidad y experiencia de los doctores en los detalles.
+     *
+     * @param detalles Arreglo de objetos Detalle que contienen la información de los doctores.
+     * @return El descuento total basado en la especialidad y experiencia de los doctores.
+     */
     public double descuento(Detalle[] detalles) {
         double descuentoTotal = 0;
 

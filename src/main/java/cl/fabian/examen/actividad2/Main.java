@@ -32,7 +32,8 @@ public class Main {
 		// Calcular descuentos
 		double descuentoPorEdad = calculoEdad.descuento(detalles);
 		double descuentoPorEspecialidadExperiencia = calculoEspecialidadExperiencia.descuento(detalles);
-
+		
+		//Imprimir datos por consola
 		System.out.println("Descuento total por Edad: " + descuentoPorEdad * 100 + "%");
 		System.out.println("Descuento total por Especialidad y Experiencia: " + descuentoPorEspecialidadExperiencia * 100 + "% \n");
 		for(Detalle detalle : detalles) {

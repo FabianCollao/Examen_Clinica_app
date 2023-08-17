@@ -1,11 +1,18 @@
 package cl.fabian.examen.modelos.entidades;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Column;
 import javax.persistence.Table;
-import java.util.Date;
 
+import java.time.LocalDate;
+
+/**
+ * Clase que representa una cita médica con información sobre el paciente, doctor, fecha y factura asociada.
+ */
 @Entity
 @Table(name = "Citas")
 public class Cita {
@@ -13,79 +20,145 @@ public class Cita {
     @Column(name = "ID")
     private int id;
 
-    @Column(name = "Paciente_ID")
-    private int pacienteId;
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name = "Paciente_ID", referencedColumnName = "ID")
+    private Paciente paciente;
 
-    @Column(name = "Doctor_ID")
-    private int doctorId;
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name = "Doctor_ID", referencedColumnName = "ID")
+    private Doctor doctor;
 
     @Column(name = "Fecha")
-    private Date fecha;
+    private LocalDate fecha;
 
-    @Column(name = "Factura_ID")
-    private int facturaId;
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name = "Factura_ID", referencedColumnName = "ID")
+    private Factura factura;
 
-    
-    // Constructor, getters y setters
-    
+    /**
+     * Constructor vacío de la clase Cita.
+     */
     public Cita() {
-    	
+
     }
-    
-	public Cita(int id, int pacienteId, int doctorId, Date fecha, int facturaId) {
-		super();
-		this.id = id;
-		this.pacienteId = pacienteId;
-		this.doctorId = doctorId;
-		this.fecha = fecha;
-		this.facturaId = facturaId;
-	}
 
-	public int getId() {
-		return id;
-	}
+    /**
+     * Constructor de la clase Cita con parámetros.
+     *
+     * @param id      El ID de la cita.
+     * @param paciente El paciente asociado a la cita.
+     * @param doctor  El doctor asociado a la cita.
+     * @param fecha   La fecha de la cita.
+     * @param factura La factura asociada a la cita.
+     */
+    public Cita(int id, Paciente paciente, Doctor doctor, LocalDate fecha, Factura factura) {
+        this.id = id;
+        this.paciente = paciente;
+        this.doctor = doctor;
+        this.fecha = fecha;
+        this.factura = factura;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    /**
+     * Obtiene el ID de la cita.
+     *
+     * @return El ID de la cita.
+     */
+    public int getId() {
+        return id;
+    }
 
-	public int getPacienteId() {
-		return pacienteId;
-	}
+    /**
+     * Establece el ID de la cita.
+     *
+     * @param id El ID de la cita a establecer.
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public void setPacienteId(int pacienteId) {
-		this.pacienteId = pacienteId;
-	}
+    /**
+     * Obtiene el paciente asociado a la cita.
+     *
+     * @return El paciente asociado a la cita.
+     */
+    public Paciente getPaciente() {
+        return paciente;
+    }
 
-	public int getDoctorId() {
-		return doctorId;
-	}
+    /**
+     * Establece el paciente asociado a la cita.
+     *
+     * @param paciente El paciente a asociar a la cita.
+     */
+    public void setPaciente(Paciente paciente) {
+        this.paciente = paciente;
+    }
 
-	public void setDoctorId(int doctorId) {
-		this.doctorId = doctorId;
-	}
+    /**
+     * Obtiene el doctor asociado a la cita.
+     *
+     * @return El doctor asociado a la cita.
+     */
+    public Doctor getDoctor() {
+        return doctor;
+    }
 
-	public Date getFecha() {
-		return fecha;
-	}
+    /**
+     * Establece el doctor asociado a la cita.
+     *
+     * @param doctor El doctor a asociar a la cita.
+     */
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
+    }
 
-	public void setFecha(Date fecha) {
-		this.fecha = fecha;
-	}
+    /**
+     * Obtiene la fecha de la cita.
+     *
+     * @return La fecha de la cita.
+     */
+    public LocalDate getFecha() {
+        return fecha;
+    }
 
-	public int getFacturaId() {
-		return facturaId;
-	}
+    /**
+     * Establece la fecha de la cita.
+     *
+     * @param fecha La fecha de la cita a establecer.
+     */
+    public void setFecha(LocalDate fecha) {
+        this.fecha = fecha;
+    }
 
-	public void setFacturaId(int facturaId) {
-		this.facturaId = facturaId;
-	}
+    /**
+     * Obtiene la factura asociada a la cita.
+     *
+     * @return La factura asociada a la cita.
+     */
+    public Factura getFactura() {
+        return factura;
+    }
 
-	@Override
-	public String toString() {
-		return "Cita [id=" + id + ", pacienteId=" + pacienteId + ", doctorId=" + doctorId + ", fecha=" + fecha
-				+ ", facturaId=" + facturaId + "]";
-	}
+    /**
+     * Establece la factura asociada a la cita.
+     *
+     * @param factura La factura a asociar a la cita.
+     */
+    public void setFactura(Factura factura) {
+        this.factura = factura;
+    }
+
+    /**
+     * Genera una representación en formato de cadena del objeto Cita.
+     *
+     * @return Una cadena que muestra la información de la cita.
+     */
+    @Override
+    public String toString() {
+        return "Cita [id=" + id + ", paciente=" + paciente + ", doctor=" + doctor + ", fecha=" + fecha + ", factura="
+                + factura + "]";
+    }
     
     
 }
